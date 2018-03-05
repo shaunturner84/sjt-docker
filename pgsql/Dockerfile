@@ -11,6 +11,7 @@ RUN yum -y install postgresql postgresql-server postgresql-devel;
 RUN su -c "initdb /var/lib/pgsql/data" - postgres;
 
 COPY etc/50_postgresql.serviceconf $SJTEnv/container/etc/conf.d/postgresql.serviceconf
+
 COPY data/*.conf /var/lib/pgsql/data/
 
 RUN chown postgres:postgres /var/lib/pgsql/data/*.conf
