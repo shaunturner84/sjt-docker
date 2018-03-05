@@ -1,0 +1,4 @@
+ServiceName="Postgresql Server"
+ServiceCmd="/usr/bin/start-pgsql.sh"
+RunAs="postgres"
+OutOfProcess=0
