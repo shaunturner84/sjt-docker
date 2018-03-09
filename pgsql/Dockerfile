@@ -35,8 +35,10 @@ RUN mkdir -p /var/backups; \
     crontab -u postgres $SJTEnv/cron/etc/postgres.crontab;
     
 COPY bin/start-pgsql.sh $SJTEnv/pgsql/bin/
+COPY bin/pg_create_client_crt.sh $SJTEnv/pgsql/bin/
 
 RUN ln -s $SJTEnv/pgsql/bin/start-pgsql.sh /usr/bin/start-pgsql.sh
+RUN ln -s $SJTEnv/pgsql/bin/pg_create_client_crt.sh /usr/bin/pg_create_client_crt.sh
 
 EXPOSE 5432
 
