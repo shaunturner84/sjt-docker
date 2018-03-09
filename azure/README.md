@@ -2,7 +2,7 @@ INTRODUCTION:
 This image sjt-azure implements a basic container that has the tools required to talk to azure via the azure-cli tools. This will later be inherited by other containers to run various solutions for azure
 
 INSTRUCTIONS:
-This inherits from image sjt-base:latest so first you'll need to build that (if you haven't already):
+This inherits from image sjt-cron:latest so first you'll need to build that and the base (if you haven't already):
 
    docker build . -t sjt-base
 
