@@ -1,6 +1,39 @@
 #!/bin/bash
 
-while getopts "i:abrx" opt;
+function usage {
+    programname=$0;
+    echo "usage: $programname ACTION [OPTIONS]"
+    echo ""
+    echo "Actions:"
+    echo "   -a             build all images"
+    echo "   -i [image]     build specific image"
+    echo ""
+    echo "Options:"
+    echo "   -r             Recursively builds image and its ancestors starting from base upwards"
+    echo "   -x             Destroy existing containers and images and rebuild"
+    echo ""
+    echo "Examples:"
+    echo ""
+    echo "  To build all images"
+    echo "      $programname -a"
+    echo ""
+    echo "  To build a specific image"
+    echo "      $programname -i sjt-pgsql"
+    echo ""
+    echo "  To build a specific image and its ancestors"
+    echo "      $programname -i sjt-pgsql -r"
+    echo ""
+    echo "  To destroy any previous builds and build a specific image (for when"
+    echo "  you've changed something on the base image)"
+    echo "      $programname -i sjt-pgsql -x"
+    echo ""
+    echo "  To destroy any previous builds and build a specific image (for when"
+    echo "  you've changed something on the base image)"
+    echo "      $programname -i sjt-pgsql -xr"
+    echo ""
+}
+
+while getopts "i:axr?" opt;
 do
     case $opt in
         i) 
@@ -15,11 +48,18 @@ do
         r)
          recursive=1;
          ;;
+        \?)
+         usage;
+         exit;
+         ;;
     esac
 done
 
 if [ ! $image ] && [ ! $allimages ]; then
     echo "either -a or -i must be supplied";
+    exit 1;
+elif [ $image ] && [ $allimages ]; then
+    echo "-a or -i are mutually exclusive";
     exit 1;
 fi
 
