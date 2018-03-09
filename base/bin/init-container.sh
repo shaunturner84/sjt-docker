@@ -9,7 +9,6 @@ fi
 
 if [ -z "$(ls -A /etc/sjt.container/conf.d)" ]; then
     echo "no service configurations present";
-    exit;
 else    
     for filename in /etc/sjt.container/conf.d/*; do        
         . $filename
@@ -20,4 +19,8 @@ else
             su -c "$ServiceCmd" - $RunAs;
         fi
     done
+fi
+
+if [ $1 ]; then
+    exec $1;
 fi

@@ -1,0 +1,4 @@
+ServiceName="Cron Daemon"
+ServiceCmd="crond"
+RunAs="root"
+OutOfProcess=1

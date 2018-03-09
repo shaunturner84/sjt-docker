@@ -3,7 +3,8 @@ FROM centos:6
 ENV defaultPassLength 10
 ENV SJTEnv /usr/local/sjt
 
-MAINTAINER shaunturner84@gmail.com
+# removed the following as its a deprecated command
+#MAINTAINER shaunturner84@gmail.com
 
 LABEL name="SJT Base Image" \
       vendor="SJT"      

@@ -1,0 +1,4 @@
+ServiceName="Cron Initialisation"
+ServiceCmd="check-cron.sh -i"
+RunAs="root"
+OutOfProcess=0

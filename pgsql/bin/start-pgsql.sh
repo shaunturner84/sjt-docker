@@ -63,7 +63,7 @@ then
                 -text \
                 -out client.csr \
                 -keyout client.key \
-                -subj "/CN=$HOSTNAME-client";
+                -subj "/CN=sjtadmin";
     chmod og-rwx client.key;
     openssl x509 -req \
                  -in client.csr \
@@ -76,6 +76,7 @@ then
     
     mv client.key /tmp
     mv client.crt /tmp
+    cp root.crt /tmp
                  
     touch /var/lib/pgsql/data/root.crl;
     chown postgres:postgres /var/lib/pgsql/data/root.crl;
@@ -89,7 +90,10 @@ then
     
     echo "Modifying pg_hba.conf" >> $logfile;
     echo "local   all         postgres                           trust" > pg_hba.conf
+    echo "hostssl    all         sjtadmin         0.0.0.0/0             cert clientcert=1" >> pg_hba.conf
+    
     echo "hostssl    all         all         0.0.0.0/0              md5 clientcert=1" >> pg_hba.conf
+    
     chown postgres:postgres pg_hba.conf;
     
     echo "first time setup completed";
